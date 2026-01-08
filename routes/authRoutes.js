@@ -6,9 +6,7 @@ const protect = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-// =======================
-// REGISTER
-// =======================
+
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -45,9 +43,7 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// =======================
-// LOGIN
-// =======================
+
 router.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -87,9 +83,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// =======================
-// PROFILE (PROTECTED)
-// =======================
+
 router.get("/profile", protect, async (req, res) => {
   res.json({
     message: "This is a protected route",
@@ -97,9 +91,7 @@ router.get("/profile", protect, async (req, res) => {
   });
 });
 
-// =======================
-// GET ALL USERS (PROTECTED)
-// =======================
+
 router.get("/users", protect, async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -127,7 +119,7 @@ router.get("/users", protect, async (req, res) => {
 });
 
 module.exports = router;
-// PUT /api/auth/users/:id (Protected)
+
 router.put("/users/:id", protect, async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -155,7 +147,7 @@ router.put("/users/:id", protect, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
-// DELETE /api/auth/users/:id (Protected)
+
 router.delete("/users/:id", protect, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
