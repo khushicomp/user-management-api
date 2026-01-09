@@ -118,7 +118,6 @@ router.get("/users", protect, async (req, res) => {
   }
 });
 
-module.exports = router;
 
 router.put("/users/:id", protect, async (req, res) => {
   try {
@@ -163,3 +162,5 @@ router.delete("/users/:id", protect, async (req, res) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+module.exports = router;
